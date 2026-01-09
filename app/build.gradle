@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace 'com.caixaapp'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId 'com.caixaapp'
-        minSdk 26
-        targetSdk 34
+        minSdk 27
+        targetSdk 35
         versionCode 1
         versionName '1.0'
     }
