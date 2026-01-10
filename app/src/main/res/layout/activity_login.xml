@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Use a autenticação do dispositivo para acessar seus lançamentos."
+            android:text="Sistema de Fluxo de Caixa Pessoal. Clique Acessar Menu para iniciar."
             android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
             android:textColor="?attr/colorOnSurfaceVariant" />
 
@@ -86,7 +86,7 @@
         android:layout_height="64dp"
         android:layout_marginHorizontal="32dp"
         android:layout_marginBottom="48dp"
-        android:text="Entrar"
+        android:text="Acessar Menu"
         android:textSize="16sp"
         app:cornerRadius="16dp"
         app:icon="@android:drawable/ic_lock_lock"
