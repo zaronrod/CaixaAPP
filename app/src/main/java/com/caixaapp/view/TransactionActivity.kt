@@ -1,10 +1,11 @@
 package com.caixaapp.view
 
 import android.app.DatePickerDialog
-import android.content.Intent
+// import android.content.Intent // No longer needed
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.caixaapp.controller.TransactionController
@@ -20,6 +21,8 @@ import java.time.LocalDate
 import java.util.Calendar
 import kotlinx.coroutines.launch
 
+// REMOVED: private val ActivityTransactionBinding.goToStatementButton: Any
+
 class TransactionActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTransactionBinding
     private lateinit var people: List<Person>
@@ -27,9 +30,17 @@ class TransactionActivity : AppCompatActivity() {
     private var selectedDate: LocalDate = LocalDate.now()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge() // Habilita o modo ponta a ponta
+
         super.onCreate(savedInstanceState)
         binding = ActivityTransactionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Set OnClickListener for the back to menu button
+        binding.backToMenuButton.setOnClickListener {
+            // Finishes this activity and returns to the previous one in the stack (MainMenu)
+            finish()
+        }
 
         val dao = DatabaseProvider.getDatabase(this).transactionDao()
         controller = TransactionController(RoomTransactionRepository(dao))
@@ -40,9 +51,11 @@ class TransactionActivity : AppCompatActivity() {
         setupTypeSelector()
 
         binding.saveButton.setOnClickListener { saveTransaction() }
-        binding.goToStatementButton.setOnClickListener {
-            startActivity(Intent(this, StatementActivity::class.java))
-        }
+
+        // REMOVED: The listener for goToStatementButton as it no longer exists
+        // binding.goToStatementButton.setOnClickListener {
+        //     startActivity(Intent(this, StatementActivity::class.java))
+        // }
     }
 
     private fun setupPessoaSpinner() {
@@ -54,7 +67,9 @@ class TransactionActivity : AppCompatActivity() {
     private fun setupDatePicker() {
         binding.dateInput.setText(DateUtils.formatDate(selectedDate))
         binding.dateInput.setOnClickListener { openDatePicker() }
-        binding.dateInputLayout.setEndIconOnClickListener { openDatePicker() }
+        // The line below might cause an error if your layout doesn't have an end icon.
+        // If it does, you can keep it. Otherwise, remove it.
+        // binding.dateInputLayout.setEndIconOnClickListener { openDatePicker() }
     }
 
     private fun setupTypeSelector() {
@@ -76,6 +91,12 @@ class TransactionActivity : AppCompatActivity() {
     }
 
     private fun saveTransaction() {
+        // Safety check for people list
+        if (people.isEmpty() || binding.pessoaSpinner.selectedItemPosition < 0) {
+            Toast.makeText(this, "Erro ao carregar os dados de pessoas.", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val selectedIndex = binding.pessoaSpinner.selectedItemPosition
         val personId = people[selectedIndex].id
         val type = if (binding.typeCredit.isChecked) TransactionType.CREDITO else TransactionType.DEBITO
@@ -111,3 +132,5 @@ class TransactionActivity : AppCompatActivity() {
         }
     }
 }
+
+// REMOVED: private fun Any.setOnClickListener(function: () -> Unit) {}

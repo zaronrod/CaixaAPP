@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- statementTitle, filterSpinner, statementRecycler, and statementSummary remain the same -->
     <TextView
         android:id="@+id/statementTitle"
         android:layout_width="0dp"
@@ -43,14 +44,15 @@
         android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/goToChartButton"
+        app:layout_constraintBottom_toTopOf="@id/backToMenuButton"
         android:layout_marginBottom="12dp" />
 
+    <!-- Button changed from "Ver evolução" to "Voltar ao Menu" -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/goToChartButton"
+        android:id="@+id/backToMenuButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ver evolução 6 meses"
+        android:text="Voltar ao Menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

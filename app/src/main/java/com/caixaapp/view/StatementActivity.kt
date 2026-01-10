@@ -3,6 +3,7 @@ package com.caixaapp.view
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,8 @@ class StatementActivity : AppCompatActivity() {
     private val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge() // Habilita o modo ponta a ponta
+
         super.onCreate(savedInstanceState)
         binding = ActivityStatementBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -36,9 +39,13 @@ class StatementActivity : AppCompatActivity() {
         setupSpinner()
         setupRecycler()
 
-        binding.goToChartButton.setOnClickListener {
-            startActivity(Intent(this, ChartActivity::class.java))
+        // --- FIX START ---
+        // Removed the listener for 'goToChartButton' as it was replaced in the XML.
+        // Added the listener for the "Back to Menu" button.
+        binding.backToMenuButton.setOnClickListener {
+            finish() // Correctly goes back to MainMenu
         }
+        // --- FIX END ---
     }
 
     private fun setupSpinner() {
@@ -69,13 +76,16 @@ class StatementActivity : AppCompatActivity() {
 
     private fun loadStatement() {
         val rateio = JsonUtils.loadRateio(this)
-        val personId = people[binding.filterSpinner.selectedItemPosition].id
+        // Ensure people list is not empty to avoid crash
+        if (people.isNotEmpty()) {
+            val personId = people[binding.filterSpinner.selectedItemPosition].id
 
-        lifecycleScope.launch {
-            val result = controller.getStatement(personId, rateio)
-            runOnUiThread {
-                adapter.update(result.items)
-                binding.statementSummary.text = "Saldo total: ${formatter.format(result.saldo)}"
+            lifecycleScope.launch {
+                val result = controller.getStatement(personId, rateio)
+                runOnUiThread {
+                    adapter.update(result.items)
+                    binding.statementSummary.text = "Saldo total: ${formatter.format(result.saldo)}"
+                }
             }
         }
     }

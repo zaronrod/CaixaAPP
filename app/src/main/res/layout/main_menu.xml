@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
+    tools:context=".view.MainMenu">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/headerCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="?attr/colorPrimaryContainer"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.MediumComponent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="40dp">
+
+            <TextView
+                android:id="@+id/menuTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menu Principal"
+                android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
+                android:textColor="?attr/colorOnPrimaryContainer"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:text="Gestão Financeira"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:textColor="?attr/colorOnPrimaryContainer" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonExit"
+        app:layout_constraintTop_toBottomOf="@id/headerCard">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonGoToTransaction"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_marginBottom="16dp"
+                android:text="Novo Lançamento"
+                android:textSize="16sp"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_menu_add"
+                app:iconSize="24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonGoToStatement"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="12dp"
+                android:text="Ver Extrato"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_menu_agenda" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonGoToChart"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="12dp"
+                android:text="Ver Gráficos"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_menu_gallery" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonExport"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="12dp"
+                android:text="Exportar Lançamentos"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_menu_share" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonSync"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="Sincronizar com API"
+                app:cornerRadius="16dp"
+                app:icon="@android:drawable/ic_popup_sync" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonExit"
+        style="@style/Widget.Material3.Button.TextButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="Sair do Aplicativo"
+        android:textColor="?attr/colorError"
+        app:icon="@android:drawable/ic_menu_close_clear_cancel"
+        app:iconTint="?attr/colorError"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
