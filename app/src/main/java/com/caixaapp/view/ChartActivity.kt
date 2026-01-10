@@ -2,8 +2,10 @@ package com.caixaapp.view
 
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.caixaapp.R // Import for R.color
 import com.caixaapp.controller.TransactionController
 import com.caixaapp.databinding.ActivityChartBinding
 import com.caixaapp.model.Person
@@ -26,6 +28,8 @@ class ChartActivity : AppCompatActivity() {
     private val formatter = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge() // Habilita o modo ponta a ponta
+
         super.onCreate(savedInstanceState)
         binding = ActivityChartBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -36,6 +40,13 @@ class ChartActivity : AppCompatActivity() {
         people = JsonUtils.loadPeople(this)
         setupSpinner()
         setupChart()
+
+        // --- CHANGE START ---
+        // Add the OnClickListener for the back to menu button.
+        binding.backToMenuButton.setOnClickListener {
+            finish() // Finishes this activity and returns to MainMenu.
+        }
+        // --- CHANGE END ---
     }
 
     private fun setupSpinner() {
@@ -65,6 +76,13 @@ class ChartActivity : AppCompatActivity() {
     }
 
     private fun loadChart() {
+        // --- CHANGE START ---
+        // Safety check to prevent a crash if the people list is empty or the spinner is not ready.
+        if (people.isEmpty() || binding.chartFilterSpinner.selectedItemPosition < 0) {
+            return
+        }
+        // --- CHANGE END ---
+
         val rateio = JsonUtils.loadRateio(this)
         val personId = people[binding.chartFilterSpinner.selectedItemPosition].id
 
@@ -80,9 +98,9 @@ class ChartActivity : AppCompatActivity() {
             }
 
             val creditSet = BarDataSet(creditEntries, "Crédito")
-            creditSet.color = getColor(com.caixaapp.R.color.green_credit)
+            creditSet.color = getColor(R.color.green_credit) // Use imported R
             val debitSet = BarDataSet(debitEntries, "Débito")
-            debitSet.color = getColor(com.caixaapp.R.color.red_debit)
+            debitSet.color = getColor(R.color.red_debit) // Use imported R
 
             val barData = BarData(creditSet, debitSet)
             val groupSpace = 0.2f

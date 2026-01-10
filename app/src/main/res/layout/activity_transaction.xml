@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- All existing fields from transactionTitle to saveButton remain the same -->
+
         <TextView
             android:id="@+id/transactionTitle"
             android:layout_width="0dp"
@@ -29,7 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/dateInput"
                 android:layout_width="match_parent"
@@ -72,13 +73,11 @@
             app:layout_constraintTop_toBottomOf="@id/typeLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
-
             <RadioButton
                 android:id="@+id/typeCredit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Crédito" />
-
             <RadioButton
                 android:id="@+id/typeDebit"
                 android:layout_width="wrap_content"
@@ -95,7 +94,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/valueInput"
                 android:layout_width="match_parent"
@@ -112,7 +110,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionInput"
                 android:layout_width="match_parent"
@@ -129,11 +126,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="24dp" />
 
+        <!-- Button changed from "Ver extrato" to "Voltar ao Menu" -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/goToStatementButton"
+            android:id="@+id/backToMenuButton"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ver extrato"
+            android:text="Voltar ao Menu"
             app:layout_constraintTop_toBottomOf="@id/saveButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

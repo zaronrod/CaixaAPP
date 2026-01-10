@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- chartTitle, chartFilterSpinner, and barChart remain the same -->
     <TextView
         android:id="@+id/chartTitle"
         android:layout_width="0dp"
@@ -41,6 +42,17 @@
         android:layout_height="wrap_content"
         android:text="Resumo dos últimos 6 meses"
         android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/backToMenuButton"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- New "Voltar ao Menu" button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backToMenuButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Voltar ao Menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

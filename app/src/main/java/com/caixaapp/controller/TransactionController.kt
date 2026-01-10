@@ -37,6 +37,15 @@ class TransactionController(
         return MonthlySummaryResult(summaries, totalCredito, totalDebito, totalCredito - totalDebito)
     }
 
+    /**
+     * Fetches all transactions from the repository.
+     * This follows the MVC pattern by keeping data access in the controller.
+     */
+    suspend fun getAllTransactions(): List<Transaction> {
+        return repository.getAll()
+    }
+
+
     private suspend fun buildStatementItems(personId: String, rateio: Map<String, Double>): List<StatementItem> {
         val adjusted = buildAdjustedTransactions(personId, rateio)
         return adjusted.sortedByDescending { it.data }.map { transaction ->
